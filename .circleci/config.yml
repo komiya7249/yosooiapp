@@ -1,0 +1,57 @@
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@2.0
+
+jobs:
+  rspec:
+    docker:
+      - image: cimg/ruby:3.2.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: bundle install
+      - run:
+          name: Start Rails server for testing
+          command: bundle exec rails server -p $PORT -e test &
+      - run:
+          name: Run RSpec
+          command: bundle exec rspec
+
+  rubocop:
+    docker:
+      - image: cimg/ruby:3.2.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: bundle install
+      - run:
+          name: Run RuboCop
+          command: bundle exec rubocop --require rubocop-airbnb
+
+  heroku_deploy:
+    executor: heroku/default
+    resource_class: small
+    steps:
+      - checkout
+      - heroku/install
+      - run:
+          name: Deploy
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
+      - run:
+          name: Run post-deploy tasks
+          command: |
+            heroku run bundle exec rake db:migrate --app $HEROKU_APP_NAME
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - rspec
+      - rubocop
+      - heroku_deploy:
+          requires:
+            - rspec
+            - rubocop
