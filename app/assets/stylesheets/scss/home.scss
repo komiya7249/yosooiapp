@@ -15,9 +15,30 @@
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  margin: 0 auto;
+  margin: 0px auto;
 }
 
 .menulist > li{
   font-size: 14px;
+}
+
+.memo_box {
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  width: 800px;
+  height: 30px;
+  margin: 0 auto;
+}
+
+.yosoi_text{
+  margin: 20px auto 0 auto;
+  width: 800px;
+}
+
+.city_select_list{
+  margin: 20px auto 0 auto;
+  width: 800px;
+  height: 30px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
