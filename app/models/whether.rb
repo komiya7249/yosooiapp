@@ -1,0 +1,2 @@
+class Whether < ApplicationRecord
+end
