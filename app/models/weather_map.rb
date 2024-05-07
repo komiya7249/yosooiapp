@@ -1,2 +1,3 @@
 class WeatherMap < ApplicationRecord
+
 end

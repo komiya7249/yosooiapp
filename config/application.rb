@@ -17,6 +17,7 @@ module Myapp
     config.autoload_lib(ignore: %w(assets tasks))
 
     config.time_zone = 'Tokyo'
+    config.i18n.default_locale = :ja
 
     # Configuration for the application, engines, and railties goes here.
     #

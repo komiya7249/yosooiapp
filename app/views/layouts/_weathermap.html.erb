@@ -9,120 +9,108 @@
     <li class="tab_menu-item" data-tab="7">30日</li>
   </ul>
   <div class="tab_panel">
-    <div class="tab_panel-box tab_panel-box001 is-show" data-panel="1">
-      <%= image_tag 'topview_rain.jpg', class: 'top_image' %>
-      <%= image_tag 'tokyo.png', class: 'tokyo_image' %>
-      <ul class="city_list">
-        <li class="city_list_item okutama">
-          <p>奥多摩町</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>
-        </li>
-        <li class="city_list_item oume">
-          <p>青梅市</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>
-        </li>
-        <li class="city_list_item tachikawa">
-          <p>立川市</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>
-        </li>
-        <li class="city_list_item nerima">
-          <p>練馬区</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>
-        </li>
-        <li class="city_list_item shinjuku">
-          <p>新宿区</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>          
-        </li>
-        <li class="city_list_item chiyoda">
-          <p>千代田区</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>          
-        </li>
-        <li class="city_list_item shinagawa">
-          <p>品川区</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>          
-        </li>
-        <li class="city_list_item setagaya">
-          <p>世田谷区</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>          
-        </li>
-        <li class="city_list_item hachioji">
-          <p>八王子市</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>          
+    <% (0..6).each do |i| %>
+      <% temperature_maxs = @temperature_maxs[i]%>
+      <% temperature_mins = @temperature_mins[i]%>
+      <% weather_codes = @weather_codes[i]%>
+      <% precipitation_probability_maxs = @precipitation_probability_maxs[i]%>
+      <div class="tab_panel-box tab_panel-box00<%= i+1 %> <%= 'is-show' if i.zero? %>" data-panel="<%= i+1 %>">
+        <%= image_tag 'topview_rain.jpg', class: 'top_image' %>
+        <%= image_tag 'tokyo.png', class: 'tokyo_image' %>
+        <ul class="city_list">
+          <li class="city_list_item okutama">
+            <p>奥多摩町</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "奥多摩町" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "奥多摩町" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "奥多摩町" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "奥多摩町" }[:value] %>%</p>
           </li>
-        <li class="city_list_item hinohara">
-          <p>檜原村</p>
-          <%= image_tag 'sun.png', class: 'symbol_image' %>
-          <p class="temperature">
-            <span class="high">24.5°</span>/
-            <span class="row">23.1°</span>
-          </p>
-          <p class="rainy_percent">30%</p>        
+          <li class="city_list_item oume">
+            <p>青梅市</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "青梅市" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "青梅市" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "青梅市" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "青梅市" }[:value] %>%</p>
           </li>
-        </li>
-      </ul>
-    </div>
-    <div class="tab_panel-box tab_panel-box002" data-panel="2">
-      <p class="tab_panel-text">2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。</p>
-    </div>
-    <div class="tab_panel-box tab_panel-box003" data-panel="3">
-      <p class="tab_panel-text">3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。</p>
-    </div>
-    <div class="tab_panel-box tab_panel-box004" data-panel="4">
-      <p class="tab_panel-text">2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。</p>
-    </div>
-    <div class="tab_panel-box tab_panel-box005" data-panel="5">
-      <p class="tab_panel-text">3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。</p>
-    </div>
-        <div class="tab_panel-box tab_panel-box006" data-panel="6">
-      <p class="tab_panel-text">2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。2枚目のタブです。</p>
-    </div>
-    <div class="tab_panel-box tab_panel-box007" data-panel="7">
-      <p class="tab_panel-text">3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。3枚目のタブです。</p>
-    </div>
+          <li class="city_list_item tachikawa">
+            <p>立川市</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "立川市" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "立川市" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "立川市" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "立川市" }[:value] %>%</p>
+          </li>
+          <li class="city_list_item nerima">
+            <p>練馬区</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "練馬区" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "練馬区" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "練馬区" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "練馬区" }[:value] %>%</p>
+          </li>
+          <li class="city_list_item shinjuku">
+            <p>新宿区</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "新宿区" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "新宿区" }[:value] %>°</span>/ 
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "新宿区" }[:value] %>°</span> 
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "新宿区" }[:value] %>%</p>          
+          </li>
+          <li class="city_list_item chiyoda">
+            <p>千代田区</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "千代田区" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "千代田区" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "千代田区" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "千代田区" }[:value] %>%</p>          
+          </li>
+          <li class="city_list_item shinagawa">
+            <p>品川区</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "品川区" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "品川区" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "品川区" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "品川区" }[:value] %>%</p>          
+          </li>
+          <li class="city_list_item setagaya">
+            <p>世田谷区</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "世田谷区" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "世田谷区" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "世田谷区" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "世田谷区" }[:value] %>%</p>          
+          </li>
+          <li class="city_list_item hachioji">
+            <p>八王子市</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "八王子市" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "八王子市" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "八王子市" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "八王子市" }[:value] %>%</p>          
+            </li>
+          <li class="city_list_item hinohara">
+            <p>檜原村</p>
+            <%= image_tag "#{weather_codes.find { |data| data[:key] == "檜原村" }[:value]}.png", class: 'symbol_image' %>
+            <p class="temperature">
+              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "檜原村" }[:value] %>°</span>/
+              <span class="row"><%= temperature_mins.find { |data| data[:key] == "檜原村" }[:value] %>°</span>
+            </p>
+            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "檜原村" }[:value] %>%</p>        
+            </li>
+          </li>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </div>
