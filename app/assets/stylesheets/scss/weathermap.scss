@@ -50,8 +50,10 @@
  
 .tab_panel-box {
   width: 800px;
-  height: 100%;
+  height: 460px;
   position: relative;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 .tab_panel-box001 {
@@ -87,20 +89,12 @@
   display: block;
 }
 
-.top_image {
-  width: 800px;
-  height: 480px;
-  object-fit: cover;
-  opacity: 0.7;
-}
-
 .tokyo_image {
   position: absolute;
-  width: 500px;
-  left: 150px;
-  top: 110px;
+  width: 650px;
+  left: 100px;
+  top: 80px;
   object-fit: contain;
-  opacity: 0.8;
 }
 
 .city_list {
@@ -115,58 +109,57 @@
   padding-top: 5px;
   width: 100px;
   height: 100px;
-  border: 1px #ffffff solid;
   background-color: #ffffff;
-  opacity: 0.9;
   text-align: center;
   border-radius: 20px;
   font-size: 14px;
+  border: solid 1px black;
 }
 
 .okutama {
-  top: 50px;
+  top: 60px;
   left: 20px;
 }
 
 .oume {
-  left: 195px;
+  left: 185px;
 }
 
 .tachikawa {
-  left: 345px;
+  left: 350px;
 }
 
 .nerima {
-  left: 510px;
+  left: 515px;
 }
 
 .shinjuku {
-  left: 660px;
-  top: 50px;
+  left: 675px;
+  top: 60px;
 }
 
 .chiyoda {
-  left: 680px;
+  left: 675px;
   top: 210px;
 }
 
 .shinagawa {
-  left: 580px;
-  top: 350px;
+  left: 515px;
+  top: 320px;
 }
 
 .setagaya {
-  left: 400px;
-  top: 350px;
+  left: 350px;
+  top: 320px;
 }
 
 .hachioji {
-  left: 200px;
-  top: 350px;
+  left: 185px;
+  top: 320px;
 }
 
 .hinohara {
-  left: 80px;
+  left: 20px;
   top: 210px;
 }
 
@@ -177,13 +170,6 @@
   width: 65%;
 }
 
-.high {
-  color: #D8315B;
-}
-
-.row {
-  color: #3E92CC;
-}
 
 .symbol_image{
   height: 35%;
@@ -194,3 +180,4 @@
   margin: 0 auto;
   font-size: 12px;
 }
+

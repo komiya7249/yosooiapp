@@ -15,7 +15,6 @@
       <% weather_codes = @weather_codes[i]%>
       <% precipitation_probability_maxs = @precipitation_probability_maxs[i]%>
       <div class="tab_panel-box tab_panel-box00<%= i+1 %> <%= 'is-show' if i.zero? %>" data-panel="<%= i+1 %>">
-        <%= image_tag 'topview_rain.jpg', class: 'top_image' %>
         <%= image_tag 'tokyo.png', class: 'tokyo_image' %>
         <ul class="city_list">
           <li class="city_list_item okutama">
