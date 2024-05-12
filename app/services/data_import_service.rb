@@ -10,7 +10,7 @@ class DataImportService
         latitude = Municipality.find(id).latitude
         longitude = Municipality.find(id).longitude
         params = URI.encode_www_form({latitude: latitude, longitude: longitude})
-        uri = URI.parse("https://api.open-meteo.com/v1/forecast?#{params}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo")
+        uri = URI.parse("https://api.open-meteo.com/v1/forecast?#{params}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max&timezone=Asia%2FTokyo")
         response = Net::HTTP.get_response(uri)
         result = JSON.parse(response.body) 
         @name = Municipality.find(id).name
@@ -23,6 +23,8 @@ class DataImportService
           record.temperature_min = result["daily"]["temperature_2m_min"][i]
           record.precipitation_probability = result["daily"]["precipitation_probability_max"][i]
           record.weather_code = result["daily"]["weather_code"][i]
+          record.apparent_temperature_max = result["daily"]["apparent_temperature_max"][i]
+          record.apparent_temperture_min = result["daily"]["apparent_temperature_min"][i]
           record.save
         end
       end

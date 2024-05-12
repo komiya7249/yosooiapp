@@ -14,4 +14,24 @@ module HomeHelper
       return "thunder"
     end
   end
+
+  def self.wear_symbol_return(num)
+    if num >= 30
+      return "tshirt"
+    elsif num >= 25 && num <= 29
+      return "short_sleeve_shirt"
+    elsif num >= 20 && num <= 24
+      return "long_sleeve_shirt"
+    elsif num >= 16 && num <= 19
+      return "Jacket"
+    elsif num >= 12 && num <= 15
+      return "nit"
+    elsif num >= 8 && num <= 11
+      return "light_outerwear"
+    elsif num >= 6 && num <= 7
+      return "outer"
+    elsif num <= 5
+      return "down_coat"
+    end
+  end
 end
