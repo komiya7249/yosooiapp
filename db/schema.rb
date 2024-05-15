@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_065213) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_15_142404) do
   create_table "municipalities", force: :cascade do |t|
     t.string "name"
     t.float "latitude"
@@ -25,13 +25,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_065213) do
     t.float "temperature_max"
     t.float "temperature_min"
     t.integer "precipitation_probability"
-    t.integer "weather_code"
+    t.string "weather_code"
     t.date "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "municipalities_name"
     t.float "apparent_temperature_max"
     t.float "apparent_temperture_min"
+    t.string "wear_symbol"
   end
 
   create_table "weathers", force: :cascade do |t|

@@ -18,6 +18,7 @@ module Myapp
 
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
+    config.action_view.automatically_disable_submit_tag = false
 
     # Configuration for the application, engines, and railties goes here.
     #

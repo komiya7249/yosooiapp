@@ -1,6 +1,6 @@
 module HomeHelper
   def self.weather_code_return(code)
-    if code === 0 || code === 2
+    if code >=0 && code <= 2
       return "sun"
     elsif code === 3
       return "cloud"

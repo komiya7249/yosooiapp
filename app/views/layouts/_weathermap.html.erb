@@ -1,12 +1,12 @@
 <div class="tab">
   <ul class="tab_menu">
-    <li class="tab_menu-item is-active" data-tab="1">24日</li>
-    <li class="tab_menu-item" data-tab="2">25日</li>
-    <li class="tab_menu-item" data-tab="3">26日</li>
-    <li class="tab_menu-item" data-tab="4">27日</li>
-    <li class="tab_menu-item" data-tab="5">28日</li>
-    <li class="tab_menu-item" data-tab="6">29日</li>
-    <li class="tab_menu-item" data-tab="7">30日</li>
+    <li class="tab_menu-item is-active" data-tab="1"><%= Time.zone.today.strftime("%d日")%><%= @week[Date.today.wday] %></li>
+    <li class="tab_menu-item" data-tab="2"><%= (Time.zone.today + 1.day).strftime("%d日")%><%= @week[(Date.today+ 1.day).wday] %></li>
+    <li class="tab_menu-item" data-tab="3"><%= (Time.zone.today + 2.day).strftime("%d日")%><%= @week[(Date.today+ 2.day).wday] %></li>
+    <li class="tab_menu-item" data-tab="4"><%= (Time.zone.today + 3.day).strftime("%d日")%><%= @week[(Date.today+ 3.day).wday] %></li>
+    <li class="tab_menu-item" data-tab="5"><%= (Time.zone.today + 4.day).strftime("%d日")%><%= @week[(Date.today+ 4.day).wday] %></li>
+    <li class="tab_menu-item" data-tab="6"><%= (Time.zone.today + 5.day).strftime("%d日")%><%= @week[(Date.today+ 5.day).wday] %></li>
+    <li class="tab_menu-item" data-tab="7"><%= (Time.zone.today + 6.day).strftime("%d日")%><%= @week[(Date.today+ 6.day).wday] %></li>
   </ul>
   <div class="tab_panel">
     <% (0..6).each do |i| %>

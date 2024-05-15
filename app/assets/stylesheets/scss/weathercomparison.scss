@@ -23,12 +23,13 @@
   font-size: 15px;
 }
 
-.sub_day {
+
+#weather-comparison-form{
   display: flex;
 }
 
 .comparison_button {
-  height: 30px;;
+  height: 30px;
   display: block;
   margin: auto;
   color: white;
@@ -71,7 +72,7 @@
 }
 
 .main_data_table {
-  width: 30%;
+  width: 35%;
   text-align: start;
   margin-top: auto;
   margin-bottom: auto;

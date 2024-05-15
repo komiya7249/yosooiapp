@@ -2,33 +2,34 @@
   <div class="weather_comparison_bar">
     <h2 class="weather_comparison_title">過去の天気と比較</h2>
     <div class="setting_box">
-      <div class="main_day">
-        <h3>今日の渋谷の天気と</h3>
-        
-      </div>
-      <div class="sub_day">
-        <h3>●●日を</h3>
-      </div>
-      <button class="comparison_button">比較する</button>
+      <%= form_with url: root_path, method: :get, data: { turbo: false }, id: "weather-comparison-form" do |f| %>
+        <%= f.select :municipalitie_name, options_for_select(@municipalities_name) %>
+        <p>の</p>
+        <%= f.select :main_day, options_for_select(@main_days) %>
+        <p>と</p>
+        <%= f.select :sub_day, options_for_select(@sub_days) %>
+        <p>の天気を</p>
+        <%= f.submit "比較する", class:"comparison_button"%>
+      <% end %>
     </div>
   </div>
   <div class="weather_comparison_block">
     <div class="comparison_main_box">
-      <p>今日の渋谷　４月22日</p>
+      <p><%= @city %><%= @main_day %></p>
       <div class="main_area">
         <div class="main_image_box">
-          <%= image_tag 'rain.png', class:"comparison_main_image"%>
-          <%= image_tag 'rain.png', class:"comparison_main_image"%>
+          <%= image_tag "#{@main_wether_data.weather_code}.png", class:"comparison_main_image"%>
+          <%= image_tag "#{@main_wether_data.wear_symbol}.png", class:"comparison_main_image"%>
         </div>
         <table class="main_data_table">
           <tr class="high">
-            <td>最高気温</td><td>20°</td>
+            <td>最高気温</td><td><%= @main_wether_data.temperature_max %>℃</td>
           </tr>
           <tr class="row">
-            <td>最低気温</td><td>18°</td>
+            <td>最低気温</td><td><%= @main_wether_data.temperature_min %>℃</td>
           </tr>
           <tr>
-            <td>降水確率</td><td>20%</td>
+            <td>降水確率</td><td><%= @main_wether_data.precipitation_probability %>%</td>
           </tr>
         </table>
       </div>
@@ -38,21 +39,21 @@
       </div>
     </div>
     <div class="comparison_sub_box">
-      <p>明日の渋谷　4月23日</p>
+      <p><%= @city %><%= @sub_day %></p>
             <div class="main_area">
         <div class="main_image_box">
-          <%= image_tag 'rain.png', class:"comparison_main_image"%>
-          <%= image_tag 'rain.png', class:"comparison_main_image"%>
+          <%= image_tag "#{@sub_wether_data.weather_code}.png", class:"comparison_main_image"%>
+          <%= image_tag "#{@sub_wether_data.wear_symbol}.png", class:"comparison_main_image"%>
         </div>
        <table class="main_data_table">
           <tr class="high">
-            <td>最高気温</td><td>20°</td>
+            <td>最高気温</td><td><%= @sub_wether_data.temperature_max %>℃</td>
           </tr>
           <tr class="row">
-            <td>最低気温</td><td>18°</td>
+            <td>最低気温</td><td><%= @sub_wether_data.temperature_min %>℃</td>
           </tr>
           <tr>
-            <td>降水確率</td><td>20%</td>
+            <td>降水確率</td><td><%= @sub_wether_data.precipitation_probability %>%</td>
           </tr>
         </table>
       </div>
