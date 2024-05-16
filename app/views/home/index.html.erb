@@ -13,6 +13,9 @@
 <div class="memo_box"></div>
 <div class="city_select_list">
   <h2>地域別</h2>
+  <% @municipalities_name.each do |item| %>
+    <%= item %>
+  <% end %>
 </div>
 <%= render 'layouts/weathercomparison' %>
 <h2>yosooi memo</h2>
