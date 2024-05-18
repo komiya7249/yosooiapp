@@ -3,7 +3,8 @@ class HomeController < ApplicationController
   def index
     DataImportService.import_data_from_api
     @week = %w[(日) (月) (火) (水) (木) (金) (土)]
-    @records = WeatherMap.where("DATE(time) = ?", Time.zone.today).to_a
+    @records = Weather.where("DATE(time) = ?", Time.zone.today).to_a
+    @municipalities = Municipality.all
     @municipalities_name = Municipality.pluck(:name)
     @weathermap_municipalities = Municipality.where(category: 'topview').order(:id)
     ids = @weathermap_municipalities.pluck(:id)
@@ -23,7 +24,7 @@ class HomeController < ApplicationController
       hashs5 = []
 
       target_date  = Time.zone.today + i
-      records = WeatherMap.where("DATE(time) = ?AND municipalities_id IN (?)", target_date, ids)
+      records = Weather.where("DATE(time) = ?AND municipalities_id IN (?)", target_date, ids)
 
       records_by_municipalities_id = records.group_by(&:municipalities_id)
 
@@ -54,13 +55,13 @@ class HomeController < ApplicationController
     if params[:main_day] === nil
       @main_day =  (Time.zone.today).strftime("%m月%d日")
       @sub_day =  (Time.zone.today-1).strftime("%m月%d日")
-      @city = @municipalities_name[0]
+      @city = @municipalities_name[4]
       date_with_year_string = "#{Time.zone.today.year}年#{@main_day}"
       date = Date.strptime(date_with_year_string, "%Y年%m月%d日")
       sub_date_with_year_string = "#{Time.zone.today.year}年#{@sub_day}"
       sub_date = Date.strptime(sub_date_with_year_string, "%Y年%m月%d日")
-      @main_wether_data = WeatherMap.where(municipalities_name: @city, time: date).first
-      @sub_wether_data = WeatherMap.where(municipalities_name: @city, time: sub_date).first
+      @main_wether_data = Weather.where(municipalities_name: @city, time: date).first
+      @sub_wether_data = Weather.where(municipalities_name: @city, time: sub_date).first
     else
       @main_day = params[:main_day]
       @sub_day = params[:sub_day]
@@ -69,8 +70,8 @@ class HomeController < ApplicationController
       date = Date.strptime(date_with_year_string, "%Y年%m月%d日")
       sub_date_with_year_string = "#{Time.zone.today.year}年#{@sub_day}"
       sub_date = Date.strptime(sub_date_with_year_string, "%Y年%m月%d日")
-      @main_wether_data = WeatherMap.where(municipalities_name: @city, time: date).first
-      @sub_wether_data = WeatherMap.where(municipalities_name: @city, time: sub_date).first
+      @main_wether_data = Weather.where(municipalities_name: @city, time: date).first
+      @sub_wether_data = Weather.where(municipalities_name: @city, time: sub_date).first
     end
   end
 end

@@ -1,2 +1,0 @@
-class Whether < ApplicationRecord
-end

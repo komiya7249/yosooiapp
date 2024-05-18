@@ -1,2 +1,0 @@
-class WeatherMap < ApplicationRecord
-end

@@ -2,9 +2,12 @@
   <div class="weather_comparison_bar">
     <h2 class="weather_comparison_title">過去の天気と比較</h2>
     <div class="setting_box">
-      <%= form_with url: root_path, method: :get, data: { turbo: false }, id: "weather-comparison-form" do |f| %>
-        <%= f.select :municipalitie_name, options_for_select(@municipalities_name) %>
-        <p>の</p>
+      <%= form_with method: :get, data: { turbo: false }, id: "weather-comparison-form" do |f| %>
+        <% if @municipalities_name.is_a?(Array) %>
+          <%= f.select :municipalitie_name, options_for_select(@municipalities_name) %>
+          <p>の</p>
+        <% else %>
+        <% end %>
         <%= f.select :main_day, options_for_select(@main_days) %>
         <p>と</p>
         <%= f.select :sub_day, options_for_select(@sub_days) %>
