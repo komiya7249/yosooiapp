@@ -13,7 +13,7 @@
         <td><%= @weekly_days[i] %><%= @week_array[i] %></td>
         <td><%= image_tag "#{@weekly_weathers[i].weather_code}.png", class:"weekly_main_image"%></td>
         <td><%= image_tag "#{@weekly_weathers[i].wear_symbol}.png", class:"weekly_main_image"%></td>
-        <td class="high"><%=  @weekly_weathers[i].temperature_max%>℃</td>
+        <td class="high"><%=  @weekly_weathers[i].temperature_max %>℃</td>
         <td class="row"><%=  @weekly_weathers[i].temperature_min %>℃</td>
         <td><%=  @weekly_weathers[i].precipitation_probability %>%</td>               
       </tr>

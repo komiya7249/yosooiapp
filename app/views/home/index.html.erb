@@ -13,7 +13,7 @@
 <div class="memo_box"></div>
 <div class="city_select_list">
   <h2>地域別</h2>
-  <% @municipalities.each do |item| %>
+  <% @weathermap_municipalities.each do |item| %>
     <%= link_to item.name, weather_path(item.id), data: { turbo: false } %>
   <% end %>
 </div>

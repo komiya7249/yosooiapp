@@ -3,51 +3,25 @@ class HomeController < ApplicationController
   def index
     DataImportService.import_data_from_api
     @week = %w[(日) (月) (火) (水) (木) (金) (土)]
-    @records = Weather.where("DATE(time) = ?", Time.zone.today).to_a
-    @municipalities = Municipality.all
-    @municipalities_name = Municipality.pluck(:name)
-    @weathermap_municipalities = Municipality.where(category: 'topview').order(:id)
-    ids = @weathermap_municipalities.pluck(:id)
-    @temperature_maxs = []
-    @temperature_mins = []
-    @weather_codes = []
-    @wear_symbols = []
-    @precipitation_probability_maxs = []
+    @weathermap_municipalities = Municipality.all
+    start_date = Time.zone.today
+    end_date = Time.zone.today + 6.days
+    weathermap_weathers = Weather.where(time: start_date..end_date)
+    @okutama_weathers = weathermap_weathers.where(municipalities_name: "奥多摩町")
+    @oume_weathers = weathermap_weathers.where(municipalities_name: "奥多摩町")
+    @tachikawa_weathers = weathermap_weathers.where(municipalities_name: "奥多摩町")
+    @nerima_weathers = weathermap_weathers.where(municipalities_name: "練馬区")
+    @shinjuku_weathers = weathermap_weathers.where(municipalities_name: "新宿区")
+    @chiyoda_weathers = weathermap_weathers.where(municipalities_name: "千代田区")
+    @shinagawa_weathers = weathermap_weathers.where(municipalities_name: "品川区")
+    @setagaya_weathers = weathermap_weathers.where(municipalities_name: "世田谷区")
+    @hachioji_weathers = weathermap_weathers.where(municipalities_name: "八王子市")
+    @hinohara_weathers = weathermap_weathers.where(municipalities_name: "檜原村")
+
     @main_days = []
     @sub_days = []
 
     (0..6).each do |i|
-      hashs1 = []
-      hashs2 = []
-      hashs3 = []
-      hashs4 = []
-      hashs5 = []
-
-      target_date  = Time.zone.today + i
-      records = Weather.where("DATE(time) = ?AND municipalities_id IN (?)", target_date, ids)
-
-      records_by_municipalities_id = records.group_by(&:municipalities_id)
-
-      ids.each do |id|
-        record = records_by_municipalities_id[id]&.first
-        if record
-          hash1 = { key: record.municipalities_name, value: record.temperature_max }
-          hash2 = { key: record.municipalities_name, value: record.temperature_min }
-          hash3 = { key: record.municipalities_name, value: record.weather_code }
-          hash4 = { key: record.municipalities_name, value: record.precipitation_probability }
-          hash5 = { key: record.municipalities_name, value: record.wear_symbol }
-          hashs1 << hash1
-          hashs2 << hash2
-          hashs3 << hash3
-          hashs4 << hash4
-          hashs5 << hash5
-        end
-      end
-      @temperature_maxs << hashs1
-      @temperature_mins << hashs2
-      @weather_codes << hashs3
-      @precipitation_probability_maxs << hashs4
-      @wear_symbols << hashs5
       @main_days << (Time.zone.today+i).strftime("%m月%d日")
       @sub_days << (Time.zone.today-i-1).strftime("%m月%d日")
     end
@@ -55,7 +29,7 @@ class HomeController < ApplicationController
     if params[:main_day] === nil
       @main_day =  (Time.zone.today).strftime("%m月%d日")
       @sub_day =  (Time.zone.today-1).strftime("%m月%d日")
-      @city = @municipalities_name[4]
+      @city = Municipality.pluck(:name)[4]
       date_with_year_string = "#{Time.zone.today.year}年#{@main_day}"
       date = Date.strptime(date_with_year_string, "%Y年%m月%d日")
       sub_date_with_year_string = "#{Time.zone.today.year}年#{@sub_day}"

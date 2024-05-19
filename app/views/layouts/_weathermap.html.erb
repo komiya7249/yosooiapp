@@ -10,114 +10,129 @@
   </ul>
   <div class="tab_panel">
     <% (0..6).each do |i| %>
-      <% temperature_maxs = @temperature_maxs[i] %>
-      <% temperature_mins = @temperature_mins[i] %>
-      <% weather_codes = @weather_codes[i] %>
-      <% wear_symbol = @wear_symbols[i] %>
-      <% precipitation_probability_maxs = @precipitation_probability_maxs[i] %>
       <div class="tab_panel-box  weathermap_panel_design tab_panel-box00<%= i+1 %> <%= 'is-show' if i.zero? %>" data-panel="<%= i+1 %>">
         <%= image_tag 'tokyo.png', class: 'tokyo_image' %>
         <ul class="city_list">
           <li class="city_list_item okutama">
-            <p>奥多摩町</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "奥多摩町" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "奥多摩町" }[:value] }.png", class: 'symbol_image' %>
-            <% puts wear_symbol.find { |data| data[:key] == "奥多摩町" }[:value] %>
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "奥多摩町" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "奥多摩町" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "奥多摩町" }[:value] %>%</p>
+            <%= link_to weather_path(@okutama_weathers[i].municipalities_id), data: { turbo: false } do %>
+              <p>奥多摩町</p>
+              <%= image_tag "#{ @okutama_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @okutama_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @okutama_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @okutama_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @okutama_weathers[i].precipitation_probability %>%</p>
+            <% end %>
+            </a>
           </li>
           <li class="city_list_item oume">
-            <p>青梅市</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "練馬区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "練馬区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "練馬区" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "練馬区" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "練馬区" }[:value] %>%</p>
+            <%= link_to weather_path(@oume_weathers[i].municipalities_id), data: { turbo: false } do %>            
+              <p>青梅市</p>
+              <%= image_tag "#{ @oume_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @oume_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @oume_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @oume_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @oume_weathers[i].precipitation_probability %>%</p>
+            <% end %>
           </li>
           <li class="city_list_item tachikawa">
-            <p>立川市</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "練馬区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "練馬区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "練馬区" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "練馬区" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "練馬区" }[:value] %>%</p>
+            <%= link_to weather_path(@tachikawa_weathers[i].municipalities_id), data: { turbo: false } do %>             
+              <p>立川市</p>
+              <%= image_tag "#{ @tachikawa_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @tachikawa_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @tachikawa_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @tachikawa_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @tachikawa_weathers[i].precipitation_probability %>%</p>
+            <% end %>              
           </li>
           <li class="city_list_item nerima">
-            <p>練馬区</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "練馬区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "練馬区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "練馬区" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "練馬区" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "練馬区" }[:value] %>%</p>
+            <%= link_to weather_path(@nerima_weathers[i].municipalities_id), data: { turbo: false } do %>              
+              <p>練馬区</p>
+              <%= image_tag "#{ @nerima_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @nerima_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @nerima_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @nerima_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @nerima_weathers[i].precipitation_probability %>%</p>
+            <% end %>               
           </li>
           <li class="city_list_item shinjuku">
-            <p>新宿区</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "新宿区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "新宿区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "新宿区" }[:value] %>°</span>/ 
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "新宿区" }[:value] %>°</span> 
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "新宿区" }[:value] %>%</p>          
+            <%= link_to weather_path(@shinjuku_weathers[i].municipalities_id), data: { turbo: false } do %>             
+              <p>新宿区</p>
+              <%= image_tag "#{ @shinjuku_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @shinjuku_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @shinjuku_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @shinjuku_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @shinjuku_weathers[i].precipitation_probability %>%</p>      
+            <% end %>                
           </li>
           <li class="city_list_item chiyoda">
-            <p>千代田区</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "千代田区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "千代田区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "千代田区" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "千代田区" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "千代田区" }[:value] %>%</p>          
+            <%= link_to weather_path(@chiyoda_weathers[i].municipalities_id), data: { turbo: false } do %>              
+              <p>千代田区</p>
+              <%= image_tag "#{ @chiyoda_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @chiyoda_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @chiyoda_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @chiyoda_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @chiyoda_weathers[i].precipitation_probability %>%</p>   
+            <% end %>       
           </li>
           <li class="city_list_item shinagawa">
-            <p>品川区</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "品川区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "品川区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "品川区" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "品川区" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "品川区" }[:value] %>%</p>          
+              <%= link_to weather_path(@shinagawa_weathers[i].municipalities_id), data: { turbo: false } do %>           
+              <p>品川区</p>
+              <%= image_tag "#{ @shinagawa_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @shinagawa_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @shinagawa_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @shinagawa_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @shinagawa_weathers[i].precipitation_probability %>%</p>  
+            <% end %>                          
           </li>
           <li class="city_list_item setagaya">
-            <p>世田谷区</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "世田谷区" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "世田谷区" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "世田谷区" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "世田谷区" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "世田谷区" }[:value] %>%</p>          
+              <%= link_to weather_path(@setagaya_weathers[i].municipalities_id), data: { turbo: false } do %>                       
+              <p>世田谷区</p>
+              <%= image_tag "#{ @setagaya_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @setagaya_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @setagaya_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @setagaya_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @setagaya_weathers[i].precipitation_probability %>%</p>  
+            <% end %>                        
           </li>
           <li class="city_list_item hachioji">
-            <p>八王子市</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "八王子市" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "八王子市" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "八王子市" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "八王子市" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "八王子市" }[:value] %>%</p>          
+            <%= link_to weather_path(@hachioji_weathers[i].municipalities_id), data: { turbo: false } do %>             
+              <p>八王子市</p>
+              <%= image_tag "#{ @hachioji_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @hachioji_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @hachioji_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @hachioji_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @hachioji_weathers[i].precipitation_probability %>%</p>  
+            <% end %>                              
             </li>
           <li class="city_list_item hinohara">
-            <p>檜原村</p>
-            <%= image_tag "#{ weather_codes.find { |data| data[:key] == "檜原村" }[:value] }.png", class: 'symbol_image' %>
-            <%= image_tag "#{ wear_symbol.find { |data| data[:key] == "檜原村" }[:value] }.png", class: 'symbol_image' %>            
-            <p class="temperature">
-              <span class="high"><%= temperature_maxs.find { |data| data[:key] == "檜原村" }[:value] %>°</span>/
-              <span class="row"><%= temperature_mins.find { |data| data[:key] == "檜原村" }[:value] %>°</span>
-            </p>
-            <p class="rainy_percent"><%= precipitation_probability_maxs.find { |data| data[:key] == "檜原村" }[:value] %>%</p>        
+            <%= link_to weather_path(@hinohara_weathers[i].municipalities_id), data: { turbo: false } do %>               
+              <p>檜原村</p>
+              <%= image_tag "#{ @hinohara_weathers[i].weather_code}.png", class: 'symbol_image' %>
+              <%= image_tag "#{ @hinohara_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
+              <p class="temperature">
+                <span class="high"><%= @hinohara_weathers[i].temperature_max %>℃</span>/
+                <span class="row"><%= @hinohara_weathers[i].temperature_min %>℃</span>
+              </p>
+              <p class="rainy_percent"><%= @hinohara_weathers[i].precipitation_probability %>%</p>    
+            <% end %>                     
             </li>
           </li>
         </ul>

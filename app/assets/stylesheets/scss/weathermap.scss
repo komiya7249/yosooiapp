@@ -170,8 +170,8 @@
 .temperature {
   display: flex;
   font-size: 12px;
-  margin: 0 auto;
-  width: 65%;
+  margin: auto;
+  width: 85%;
 }
 
 
@@ -185,3 +185,7 @@
   font-size: 12px;
 }
 
+.city_list_item >  a {
+  text-decoration:none;
+  color: black;
+}

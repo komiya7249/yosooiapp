@@ -1,5 +1,4 @@
 .header{
-  color: white;
   background-color: black;
   width: 100%;
   height: 70px;
@@ -11,4 +10,9 @@
 
 h1{
   text-align: center;
+}
+
+.header_text {
+  text-decoration: none;
+  color: white;
 }
