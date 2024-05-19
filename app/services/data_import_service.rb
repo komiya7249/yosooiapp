@@ -3,9 +3,9 @@ class DataImportService
     municipalities = Municipality.order(:id)
     ids = municipalities.pluck(:id)
     last_record = Weather.order(created_at: :desc).first
-    @last_created_at = last_record.created_at if last_record
+    last_created_at = last_record.created_at if last_record
 
-    if !@last_created_at || @last_created_at.to_date < Time.zone.today
+    if !last_created_at || last_created_at.to_date < Time.zone.today
       Weather.delete_all
       ids.each do |id|
         latitude = Municipality.find(id).latitude
@@ -23,12 +23,10 @@ class DataImportService
         end
 
         for i in 0..13
-
           if result["daily"]["time"][i].nil?
             Rails.logger.error "Data missing for Municipality ID: #{id}, Index: #{i}"
             next
           end
-
           weather_code = HomeHelper.weather_code_return(result["daily"]["weather_code"][i])
           wear_symbol = HomeHelper.wear_symbol_return(result["daily"]["apparent_temperature_max"][i].to_i)
           record = Weather.new
@@ -49,7 +47,6 @@ class DataImportService
               else
                 Rails.logger.error "Failed to save record for Municipality ID: #{id}, Date: #{record.time}, Errors: #{record.errors.full_messages}"
               end
-              # 他のデータ保存処理や操作
             rescue => e
               Rails.logger.error "Transaction failed: #{e.message}"
               raise ActiveRecord::Rollback
@@ -61,4 +58,48 @@ class DataImportService
     else
     end
   end
+
+  def self.import_hourweatherdata_from_api(id)
+    municipality = Municipality.where(id: id).first
+    last_record = HourWeather.where(municipalities_id: id).order(created_at: :desc).first
+    last_created_at = last_record.created_at if last_record
+    if !last_created_at || last_created_at.to_date < Time.zone.today
+      HourWeather.delete_all
+      latitude = municipality.latitude
+      longitude = municipality.longitude
+      params = URI.encode_www_form({latitude: latitude, longitude: longitude})
+      uri = URI.parse("https://api.open-meteo.com/v1/forecast?#{params}&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1")
+      response = Net::HTTP.get_response(uri)
+      result = JSON.parse(response.body) 
+      puts "ID: #{id}, Response: #{result.inspect}"
+      name = municipality.name
+
+      for i in 0..23
+        weather_code = HomeHelper.weather_code_return(result["hourly"]["weather_code"][i])
+        wear_symbol = HomeHelper.wear_symbol_return(result["hourly"]["apparent_temperature"][i].to_i)
+        record = HourWeather.new
+        record.time = result["hourly"]["time"][i]
+        record.temperature = result["hourly"]["temperature_2m"][i]
+        record.apparent_temperature = result["hourly"]["apparent_temperature"][i]
+        record.precipitation_probability = result["hourly"]["precipitation_probability"][i]
+        record.wear_symbol = wear_symbol
+        record.weather_code = weather_code
+        record.municipalities_id = id
+        record.municipalities_name = name
+        ApplicationRecord.transaction do
+          begin
+            if record.save
+              Rails.logger.info "Record saved for Municipality ID: #{id}, Date: #{record.time}"
+            else
+              Rails.logger.error "Failed to save record for Municipality ID: #{id}, Date: #{record.time}, Errors: #{record.errors.full_messages}"
+            end
+          rescue => e
+            Rails.logger.error "Transaction failed: #{e.message}"
+            raise ActiveRecord::Rollback
+          end
+        end
+      end
+    end
+  end
+
 end

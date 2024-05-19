@@ -1,6 +1,9 @@
 class WeatherController < ApplicationController
   def show
     DataImportService.import_data_from_api
+    id = params[:id]
+    DataImportService.import_hourweatherdata_from_api(id)
+
     @week = %w[(日) (月) (火) (水) (木) (金) (土)]
     @records = Weather.where("DATE(time) = ?", Time.zone.today).to_a
     @municipalities_name = Municipality.find(params[:id]).name
@@ -11,6 +14,8 @@ class WeatherController < ApplicationController
     @week_array = []
     @main_days = []
     @sub_days = []
+
+    @hourly_weathers = HourWeather.pluck(:time)
 
     (0..6).each do |i|
       records = Weather.where(municipalities_id: params[:id]).where(time:Time.zone.today+ i.day).first
