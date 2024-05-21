@@ -15,7 +15,7 @@ class WeatherController < ApplicationController
     @main_days = []
     @sub_days = []
 
-    @hourly_weathers = HourWeather.pluck(:time)
+    @hour_weathers = HourWeather.all
 
     (0..6).each do |i|
       records = Weather.where(municipalities_id: params[:id]).where(time:Time.zone.today+ i.day).first

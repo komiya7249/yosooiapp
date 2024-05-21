@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_19_062720) do
-  create_table "hour_weathers", charset: "utf8mb3", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2024_05_19_071559) do
+  create_table "hour_weathers", force: :cascade do |t|
     t.datetime "time"
     t.float "temperature"
     t.float "apparent_temperature"
@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_062720) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "municipalities", charset: "utf8mb3", force: :cascade do |t|
+  create_table "municipalities", force: :cascade do |t|
     t.string "name"
     t.float "latitude"
     t.float "longitude"
@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_062720) do
     t.string "category"
   end
 
-  create_table "weathers", charset: "utf8mb3", force: :cascade do |t|
+  create_table "weathers", force: :cascade do |t|
     t.integer "municipalities_id"
     t.float "temperature_max"
     t.float "temperature_min"

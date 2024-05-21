@@ -3,7 +3,7 @@
 <div class="weather_show_tab">
   <ul class="tab_menu">
     <li class="tab_menu-item is-active" data-tab="1">過去の天気と比較</li>
-    <li class="tab_menu-item" data-tab="2">３時間ごとの天気</li>
+    <li class="tab_menu-item" data-tab="2">１時間ごとの天気</li>
     <li class="tab_menu-item" data-tab="3">週間天気予報</li>
   </ul>
   <div class="tab_panel">
@@ -11,7 +11,7 @@
       <%= render 'layouts/weathercomparison' %>
     </div>
     <div class="tab_panel-box tab_panel-box002" data-panel="2">
-
+      <%= render 'layouts/hourweather' %>
     </div>
     <div class="tab_panel-box tab_panel-box003" data-panel="3">
       <%= render 'layouts/weeklyweather' %>

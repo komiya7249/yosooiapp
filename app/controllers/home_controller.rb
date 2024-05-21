@@ -8,8 +8,8 @@ class HomeController < ApplicationController
     end_date = Time.zone.today + 6.days
     weathermap_weathers = Weather.where(time: start_date..end_date)
     @okutama_weathers = weathermap_weathers.where(municipalities_name: "奥多摩町")
-    @oume_weathers = weathermap_weathers.where(municipalities_name: "奥多摩町")
-    @tachikawa_weathers = weathermap_weathers.where(municipalities_name: "奥多摩町")
+    @oume_weathers = weathermap_weathers.where(municipalities_name: "青梅市")
+    @tachikawa_weathers = weathermap_weathers.where(municipalities_name: "立川市")
     @nerima_weathers = weathermap_weathers.where(municipalities_name: "練馬区")
     @shinjuku_weathers = weathermap_weathers.where(municipalities_name: "新宿区")
     @chiyoda_weathers = weathermap_weathers.where(municipalities_name: "千代田区")

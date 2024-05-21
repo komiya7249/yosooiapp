@@ -63,6 +63,7 @@ class DataImportService
     municipality = Municipality.where(id: id).first
     last_record = HourWeather.where(municipalities_id: id).order(created_at: :desc).first
     last_created_at = last_record.created_at if last_record
+
     if !last_created_at || last_created_at.to_date < Time.zone.today
       HourWeather.delete_all
       latitude = municipality.latitude
@@ -101,5 +102,4 @@ class DataImportService
       end
     end
   end
-
 end
