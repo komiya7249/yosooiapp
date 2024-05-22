@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   def index
     DataImportService.import_data_from_api
     @week = %w[(日) (月) (火) (水) (木) (金) (土)]
-    @weathermap_municipalities = Municipality.all
+    @municipalities = Municipality.all
     start_date = Time.zone.today
     end_date = Time.zone.today + 6.days
     weathermap_weathers = Weather.where(time: start_date..end_date)
@@ -17,19 +17,26 @@ class HomeController < ApplicationController
     @setagaya_weathers = weathermap_weathers.where(municipalities_name: "世田谷区")
     @hachioji_weathers = weathermap_weathers.where(municipalities_name: "八王子市")
     @hinohara_weathers = weathermap_weathers.where(municipalities_name: "檜原村")
+    @municipalities_name = @municipalities.pluck(:name)
+    @ward_municipalities = @municipalities.where(area: "23ward" )
+    @tama_municipalities = @municipalities.where(area: "tama")
 
     @main_days = []
     @sub_days = []
 
     (0..6).each do |i|
-      @main_days << (Time.zone.today+i).strftime("%m月%d日")
-      @sub_days << (Time.zone.today-i-1).strftime("%m月%d日")
+      main_date =  (Time.zone.today+i)
+      sub_date = (Time.zone.today-i-1)
+      main_week = @week[main_date.wday]
+      sub_week = @week[sub_date.wday]
+      @main_days << "#{main_date.strftime("%m月%d日")} #{main_week} "
+      @sub_days << "#{sub_date.strftime("%m月%d日")} #{sub_week} "
     end
 
     if params[:main_day] === nil
-      @main_day =  (Time.zone.today).strftime("%m月%d日")
-      @sub_day =  (Time.zone.today-1).strftime("%m月%d日")
-      @city = Municipality.pluck(:name)[4]
+      @main_day =  @main_days[0]
+      @sub_day =  @sub_days[0]
+      @city =@municipalities_name[0]
       date_with_year_string = "#{Time.zone.today.year}年#{@main_day}"
       date = Date.strptime(date_with_year_string, "%Y年%m月%d日")
       sub_date_with_year_string = "#{Time.zone.today.year}年#{@sub_day}"

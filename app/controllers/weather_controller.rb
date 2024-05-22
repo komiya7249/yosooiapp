@@ -19,15 +19,19 @@ class WeatherController < ApplicationController
 
     (0..6).each do |i|
       records = Weather.where(municipalities_id: params[:id]).where(time:Time.zone.today+ i.day).first
-      @main_days << (Time.zone.today+i).strftime("%m月%d日")
-      @sub_days << (Time.zone.today-i-1).strftime("%m月%d日")
       @weekly_days << (Time.zone.today + i.day).strftime("%d日")
       @week_array << @week[(Date.today+ i.day).wday]
+      main_date =  (Time.zone.today+i)
+      sub_date = (Time.zone.today-i-1)
+      main_week = @week[main_date.wday]
+      sub_week = @week[sub_date.wday]
+      @main_days << "#{main_date.strftime("%m月%d日")} #{main_week} "
+      @sub_days << "#{sub_date.strftime("%m月%d日")} #{sub_week} "
     end
 
     if params[:main_day] === nil
-      @main_day =  (Time.zone.today).strftime("%m月%d日")
-      @sub_day =  (Time.zone.today-1).strftime("%m月%d日")
+      @main_day = @main_days[0]
+      @sub_day =  @sub_days[0]
       @city = @municipalities_name
       date_with_year_string = "#{Time.zone.today.year}年#{@main_day}"
       date = Date.strptime(date_with_year_string, "%Y年%m月%d日")

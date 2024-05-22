@@ -54,7 +54,7 @@
   text-align: center;
   border-left: solid 1px black;
   border-bottom: solid 1px black;
-  margin-right: 10px;
+
 }
 
 .comparison_sub_box {
@@ -101,4 +101,35 @@ table td {
 .main_yosooimemo_area {
   text-align: start;
   padding: 20px;
+}
+
+.sub_image_box {
+  margin-top: 10px;
+  width: 60%;
+  display: flex;
+}
+
+.sub_data_table {
+  width: 40%;
+  text-align: start;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 15px;
+}
+
+.sub_area {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  height: 100px;
+}
+
+.sub_yosooimemo_area {
+  text-align: start;
+  padding: 20px;
+}
+
+.setting_box_text {
+  line-height: 30px;
+  height: 30px;
 }

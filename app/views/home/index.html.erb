@@ -9,13 +9,25 @@
 </div>
 <%= render 'layouts/weathermap' %>
 <p class="yosoi_text">yosooi memo</p>
-<%=@result%>
 <div class="memo_box"></div>
 <div class="city_select_list">
   <h2>地域別</h2>
-  <% @weathermap_municipalities.each do |item| %>
-    <%= link_to item.name, weather_path(item.id), data: { turbo: false } %>
-  <% end %>
+  <div class="area_container">
+    <h3>東京２３区</h3>
+    <ul class="area_box">
+      <% @ward_municipalities.each do |item| %>
+      <li><%= link_to item.name, weather_path(item.id), class: "area_box_link", data: { turbo: false } %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="area_container">
+    <h3>多摩地区</h3>
+      <ul class="area_box">
+      <% @tama_municipalities.each do |item| %>
+        <li><%= link_to item.name, weather_path(item.id), class: "area_box_link", data: { turbo: false } %></li>
+      <% end %>
+      </ul>
+  </div>
 </div>
 <%= render 'layouts/weathercomparison' %>
 <h2>yosooi memo</h2>

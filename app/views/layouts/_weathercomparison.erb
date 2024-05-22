@@ -5,13 +5,13 @@
       <%= form_with method: :get, data: { turbo: false }, id: "weather-comparison-form" do |f| %>
         <% if @municipalities_name.is_a?(Array) %>
           <%= f.select :municipalitie_name, options_for_select(@municipalities_name) %>
-          <p>の</p>
+          <p class="setting_box_text">の</p>
         <% else %>
         <% end %>
         <%= f.select :main_day, options_for_select(@main_days) %>
-        <p>と</p>
+        <p class="setting_box_text">と</p>
         <%= f.select :sub_day, options_for_select(@sub_days) %>
-        <p>の天気を</p>
+        <p class="setting_box_text">の天気を</p>
         <%= f.submit "比較する", class:"comparison_button"%>
       <% end %>
     </div>
@@ -43,12 +43,12 @@
     </div>
     <div class="comparison_sub_box">
       <p><%= @city %><%= @sub_day %></p>
-            <div class="main_area">
-        <div class="main_image_box">
+      <div class="sub_area">
+        <div class="sub_image_box">
           <%= image_tag "#{@sub_wether_data.weather_code}.png", class:"comparison_main_image"%>
           <%= image_tag "#{@sub_wether_data.wear_symbol}.png", class:"comparison_main_image"%>
         </div>
-       <table class="main_data_table">
+       <table class="sub_data_table">
           <tr class="high">
             <td>最高気温</td><td><%= @sub_wether_data.temperature_max %>℃</td>
           </tr>
@@ -60,7 +60,7 @@
           </tr>
         </table>
       </div>
-      <div class="main_yosooimemo_area">
+      <div class="sub_yosooimemo_area">
         <p>こんな装いメモがありました</p>
         <p>ユーザー　今日はこんな服装にしようかな〜</p>
       </div>
