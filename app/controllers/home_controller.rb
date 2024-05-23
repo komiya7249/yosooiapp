@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   include HomeHelper
   def index
-    DataImportService.import_data_from_api
+    DataImportService.import_weatherdata_from_api
     @week = %w[(日) (月) (火) (水) (木) (金) (土)]
     @municipalities = Municipality.all
     start_date = Time.zone.today

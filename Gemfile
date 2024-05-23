@@ -32,6 +32,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-airbnb', require: false
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do

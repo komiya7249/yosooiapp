@@ -1,6 +1,6 @@
 class WeatherController < ApplicationController
   def show
-    DataImportService.import_data_from_api
+    DataImportService.import_weatherdata_from_api
     id = params[:id]
     DataImportService.import_hourweatherdata_from_api(id)
 

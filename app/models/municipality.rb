@@ -1,2 +1,3 @@
 class Municipality < ApplicationRecord
+
 end
