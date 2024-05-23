@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      municipality: "市区町村"
+  errors:
+    messages:
+      invalid_locale: "は無効なロケールです"
