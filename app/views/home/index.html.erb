@@ -15,15 +15,31 @@
   <div class="area_container">
     <h3>東京２３区</h3>
     <ul class="area_box">
-      <% @ward_municipalities.each do |item| %>
+      <% @municipalities.where(area: "23ward").each do |item| %>
       <li><%= link_to item.name, weather_path(item.id), class: "area_box_link", data: { turbo: false } %></li>
       <% end %>
     </ul>
   </div>
   <div class="area_container">
-    <h3>多摩地区</h3>
+    <h3>市部</h3>
       <ul class="area_box">
-      <% @tama_municipalities.each do |item| %>
+      <% @municipalities.where(area: "suburbs").each do |item| %>
+        <li><%= link_to item.name, weather_path(item.id), class: "area_box_link", data: { turbo: false } %></li>
+      <% end %>
+      </ul>
+  </div>
+    <div class="area_container">
+    <h3>郡部</h3>
+      <ul class="area_box">
+      <% @municipalities.where(area: "county").each do |item| %>
+        <li><%= link_to item.name, weather_path(item.id), class: "area_box_link", data: { turbo: false } %></li>
+      <% end %>
+      </ul>
+  </div>
+    <div class="area_container">
+    <h3>島部</h3>
+      <ul class="area_box">
+      <% @municipalities.where(area: "island").each do |item| %>
         <li><%= link_to item.name, weather_path(item.id), class: "area_box_link", data: { turbo: false } %></li>
       <% end %>
       </ul>

@@ -102,7 +102,6 @@ class DataImportService
 
 
 
-
   def self.hourweather_generate_api_url(latitude, longitude)
     params = URI.encode_www_form({latitude: latitude, longitude: longitude})
     URI.parse("https://api.open-meteo.com/v1/forecast?#{params}&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code&timezone=Asia%2FTokyo&forecast_days=1")
@@ -157,3 +156,4 @@ class DataImportService
     end
   end
 end
+

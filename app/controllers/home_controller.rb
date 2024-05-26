@@ -18,8 +18,7 @@ class HomeController < ApplicationController
     @hachioji_weathers = weathermap_weathers.where(municipalities_name: "八王子市")
     @hinohara_weathers = weathermap_weathers.where(municipalities_name: "檜原村")
     @municipalities_name = @municipalities.pluck(:name)
-    @ward_municipalities = @municipalities.where(area: "23ward" )
-    @tama_municipalities = @municipalities.where(area: "tama")
+
 
     @main_days = []
     @sub_days = []

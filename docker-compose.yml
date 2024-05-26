@@ -13,6 +13,19 @@ services:
     command: 
       --default-authentication-plugin=mysql_native_password
 
+  test-mysql:
+    image: mysql:8.0.28
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - default
+    ports:
+      - "3308:3306"
+    command: 
+      --default-authentication-plugin=mysql_native_password
+
+
+
   web:
     build:
       context: .
