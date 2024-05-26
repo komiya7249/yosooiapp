@@ -19,8 +19,8 @@ development:
 
 test:
   <<: *default
-  database: myapp2_development
+  database: myapp2_test
 
 production:
   <<: *default
-  database: myapp2_development
+  database: myapp2_production
