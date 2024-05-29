@@ -9,7 +9,7 @@ class WeatherController < ApplicationController
     @municipalities_name = Municipality.find(params[:id]).name
     start_date = Time.zone.today
     end_date = Time.zone.today + 6.days
-    @weekly_weathers = Weather.where(municipalities_id: params[:id]).where(time: start_date..end_date)
+    @weekly_weathers = Weather.where(municipality_id: params[:id]).where(time: start_date..end_date)
     @weekly_days = []
     @week_array = []
     @main_days = []
@@ -18,7 +18,7 @@ class WeatherController < ApplicationController
     @hour_weathers = HourWeather.all
 
     (0..6).each do |i|
-      records = Weather.where(municipalities_id: params[:id]).where(time:Time.zone.today+ i.day).first
+      records = Weather.where(municipality_id: params[:id]).where(time:Time.zone.today+ i.day).first
       @weekly_days << (Time.zone.today + i.day).strftime("%d日")
       @week_array << @week[(Date.today+ i.day).wday]
       main_date =  (Time.zone.today+i)

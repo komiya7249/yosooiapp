@@ -10,7 +10,7 @@
         <%= image_tag 'tokyo.png', class: 'tokyo_image' %>
         <ul class="city_list">
           <li class="city_list_item okutama">
-            <%= link_to weather_path(@okutama_weathers[i].municipalities_id), data: { turbo: false } do %>
+            <%= link_to weather_path(@okutama_weathers[i].municipality_id), data: { turbo: false } do %>
               <p>奥多摩町</p>
               <%= image_tag "#{ @okutama_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @okutama_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -23,7 +23,7 @@
             </a>
           </li>
           <li class="city_list_item oume">
-            <%= link_to weather_path(@oume_weathers[i].municipalities_id), data: { turbo: false } do %>            
+            <%= link_to weather_path(@oume_weathers[i].municipality_id), data: { turbo: false } do %>            
               <p>青梅市</p>
               <%= image_tag "#{ @oume_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @oume_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -35,7 +35,7 @@
             <% end %>
           </li>
           <li class="city_list_item tachikawa">
-            <%= link_to weather_path(@tachikawa_weathers[i].municipalities_id), data: { turbo: false } do %>             
+            <%= link_to weather_path(@tachikawa_weathers[i].municipality_id), data: { turbo: false } do %>             
               <p>立川市</p>
               <%= image_tag "#{ @tachikawa_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @tachikawa_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -47,7 +47,7 @@
             <% end %>              
           </li>
           <li class="city_list_item nerima">
-            <%= link_to weather_path(@nerima_weathers[i].municipalities_id), data: { turbo: false } do %>              
+            <%= link_to weather_path(@nerima_weathers[i].municipality_id), data: { turbo: false } do %>              
               <p>練馬区</p>
               <%= image_tag "#{ @nerima_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @nerima_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -59,7 +59,7 @@
             <% end %>               
           </li>
           <li class="city_list_item shinjuku">
-            <%= link_to weather_path(@shinjuku_weathers[i].municipalities_id), data: { turbo: false } do %>             
+            <%= link_to weather_path(@shinjuku_weathers[i].municipality_id), data: { turbo: false } do %>             
               <p>新宿区</p>
               <%= image_tag "#{ @shinjuku_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @shinjuku_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -71,7 +71,7 @@
             <% end %>                
           </li>
           <li class="city_list_item chiyoda">
-            <%= link_to weather_path(@chiyoda_weathers[i].municipalities_id), data: { turbo: false } do %>              
+            <%= link_to weather_path(@chiyoda_weathers[i].municipality_id), data: { turbo: false } do %>              
               <p>千代田区</p>
               <%= image_tag "#{ @chiyoda_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @chiyoda_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -83,7 +83,7 @@
             <% end %>       
           </li>
           <li class="city_list_item shinagawa">
-              <%= link_to weather_path(@shinagawa_weathers[i].municipalities_id), data: { turbo: false } do %>           
+              <%= link_to weather_path(@shinagawa_weathers[i].municipality_id), data: { turbo: false } do %>           
               <p>品川区</p>
               <%= image_tag "#{ @shinagawa_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @shinagawa_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -95,7 +95,7 @@
             <% end %>                          
           </li>
           <li class="city_list_item setagaya">
-              <%= link_to weather_path(@setagaya_weathers[i].municipalities_id), data: { turbo: false } do %>                       
+              <%= link_to weather_path(@setagaya_weathers[i].municipality_id), data: { turbo: false } do %>                       
               <p>世田谷区</p>
               <%= image_tag "#{ @setagaya_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @setagaya_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -107,7 +107,7 @@
             <% end %>                        
           </li>
           <li class="city_list_item hachioji">
-            <%= link_to weather_path(@hachioji_weathers[i].municipalities_id), data: { turbo: false } do %>             
+            <%= link_to weather_path(@hachioji_weathers[i].municipality_id), data: { turbo: false } do %>             
               <p>八王子市</p>
               <%= image_tag "#{ @hachioji_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @hachioji_weathers[i].wear_symbol}.png", class: 'symbol_image' %>
@@ -119,7 +119,7 @@
             <% end %>                              
             </li>
           <li class="city_list_item hinohara">
-            <%= link_to weather_path(@hinohara_weathers[i].municipalities_id), data: { turbo: false } do %>               
+            <%= link_to weather_path(@hinohara_weathers[i].municipality_id), data: { turbo: false } do %>               
               <p>檜原村</p>
               <%= image_tag "#{ @hinohara_weathers[i].weather_code}.png", class: 'symbol_image' %>
               <%= image_tag "#{ @hinohara_weathers[i].wear_symbol}.png", class: 'symbol_image' %>

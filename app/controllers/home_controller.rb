@@ -18,7 +18,7 @@ class HomeController < ApplicationController
     @hachioji_weathers = weathermap_weathers.where(municipalities_name: "八王子市")
     @hinohara_weathers = weathermap_weathers.where(municipalities_name: "檜原村")
     @municipalities_name = @municipalities.pluck(:name)
-
+    tomorrow = Time.zone.today + 1
 
     @main_days = []
     @sub_days = []
@@ -28,8 +28,8 @@ class HomeController < ApplicationController
       sub_date = (Time.zone.today-i-1)
       main_week = @week[main_date.wday]
       sub_week = @week[sub_date.wday]
-      @main_days << "#{main_date.strftime("%m月%d日")} #{main_week} "
-      @sub_days << "#{sub_date.strftime("%m月%d日")} #{sub_week} "
+      @main_days << "#{main_date.strftime("%m月%d日")}#{main_week} "
+      @sub_days << "#{sub_date.strftime("%m月%d日")}#{sub_week} "
     end
 
     if params[:main_day] === nil

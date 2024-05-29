@@ -52,7 +52,6 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '~> 4.0'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers', '~> 5.3.0'
   gem 'database_cleaner-active_record'
 end
 

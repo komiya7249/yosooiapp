@@ -55,7 +55,7 @@ class DataImportService
       weather_code = weather_code_return(result["daily"]["weather_code"][i])
       wear_symbol = wear_symbol_return(result["daily"]["apparent_temperature_max"][i].to_i)
       record = Weather.new(
-      municipalities_id: id,
+      municipality_id: id,
       municipalities_name: name,
       time: result["daily"]["time"][i],
       temperature_max: result["daily"]["temperature_2m_max"][i],
@@ -123,7 +123,7 @@ class DataImportService
       precipitation_probability: result["hourly"]["precipitation_probability"][i],
       wear_symbol: wear_symbol,
       weather_code: weather_code,
-      municipalities_id: id,
+      municipality_id: id,
       municipalities_name: name
       )
 
@@ -144,7 +144,7 @@ class DataImportService
 
   def self.import_hourweatherdata_from_api(id)
     municipality = Municipality.where(id: id).first
-    last_record = HourWeather.where(municipalities_id: id).order(created_at: :desc).first
+    last_record = HourWeather.where(municipality_id: id).order(created_at: :desc).first
     last_created_at = last_record&.created_at
 
     if !last_created_at || last_created_at.to_date < Time.zone.today
