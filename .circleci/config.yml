@@ -13,9 +13,6 @@ jobs:
           name: Install dependencies
           command: bundle install
       - run:
-          name: Start Rails server for testing
-          command: bundle exec rails server -p $PORT -e test &
-      - run:
           name: Run RSpec
           command: bundle exec rspec
 
