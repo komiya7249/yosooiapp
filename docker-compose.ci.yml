@@ -8,6 +8,19 @@ services:
       - default
     ports:
       - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: 
+      --default-authentication-plugin=mysql_native_password
+
+  test-mysql:
+    image: mysql:8.0.28
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - default
+    ports:
+      - "3308:3306"
     command: 
       --default-authentication-plugin=mysql_native_password
 
@@ -16,9 +29,17 @@ services:
       context: .
       dockerfile: Dockerfile.ci
     depends_on:
-      - mysql
+      - mysql   
+    networks:
+      - default 
+    volumes:
+    - .:/myapp2
+    - /myapp2/log
+    - /myapp2/tmp
     ports:
       - '3000:3000'
-   networks:
-      - default
-    command: bundle exec rails server -b 0.0.0.0
+    tty: true
+    stdin_open: true
+
+volumes:
+  mysql_data:
