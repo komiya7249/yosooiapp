@@ -71,6 +71,18 @@ RSpec.configure do |config|
       end
     end
   end
+
+  config.before(:each) do
+    ActiveRecord::Base.transaction do
+    end
+  end
+  
+  config.after(:each) do
+    ActiveRecord::Base.transaction do
+      raise ActiveRecord::Rollback
+    end
+  end
+
 end
 Capybara.register_driver :selenium_chrome_headless do |app|
   options = ::Selenium::WebDriver::Chrome::Options.new

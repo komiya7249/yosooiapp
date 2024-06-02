@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe DataImportService, type: :service do
+  before do
+    FactoryBot.create(:municipality, id: 1)
+  end
+
   describe 'weather_code_return' do
     it '0以上2以下の時にsunを返すこと' do
       expect(DataImportService.weather_code_return(1)).to eq("sun")
@@ -96,7 +100,6 @@ RSpec.describe DataImportService, type: :service do
         }
       }
     }
-
     it '気象情報がデータベースへ保存されること' do
       expect { DataImportService.save_weather_data(id, name, result) }.to change { Weather.count }.by(1)
     end
@@ -107,10 +110,6 @@ RSpec.describe DataImportService, type: :service do
   end
 
   describe 'import_weatherdata_from_api' do
-    before do
-      FactoryBot.create(:municipality)    
-    end
-
     it '気象データを正しくインポートできること' do
       allow(DataImportService).to receive(:fetch_weather_data).and_return({
         "daily" => {
@@ -160,12 +159,7 @@ RSpec.describe DataImportService, type: :service do
   end
 
   describe 'import_hourweatherdata_from_api' do
-    before do
-      FactoryBot.create(:municipality, id:1)
-    end
-
     it '気象データを正しくインポートできること' do
-
       allow(DataImportService).to receive(:fetch_weather_data).and_return({
         "hourly" => {
           "time" => ["2024-05-25"],
@@ -178,5 +172,4 @@ RSpec.describe DataImportService, type: :service do
       expect { DataImportService.import_hourweatherdata_from_api(1) }.to change { HourWeather.count }.by(1)
     end
   end
-
 end
