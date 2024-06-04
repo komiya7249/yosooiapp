@@ -5,8 +5,6 @@ ruby '3.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7.0', '>= 7.1.3.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 6.0'
 # Use SCSS for stylesheets
@@ -53,6 +51,7 @@ group :test do
   gem 'selenium-webdriver', '~> 4.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'database_cleaner-active_record'
+  gem 'rspec_junit_formatter'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

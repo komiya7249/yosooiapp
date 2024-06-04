@@ -154,6 +154,6 @@ class DataImportService
       puts "ID: #{id}, Response: #{result.inspect}"
       save_hourweather_data(id, municipality.name, result)
     end
-  end
+  end    
 end
 
