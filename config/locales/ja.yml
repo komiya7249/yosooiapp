@@ -1,0 +1,15 @@
+ja:
+  # activerecord:
+  #   models:
+  #     municipality: "市区町村"
+  #   attributes:
+  #     municipality:
+  #       name: "名前"
+  # errors:
+  #   messages:
+  #     blank: "を入力してください"
+  #   models:
+  #     municipality:
+  #       attributes:
+  #         name:
+  #           blank: "名前が入力されていません"

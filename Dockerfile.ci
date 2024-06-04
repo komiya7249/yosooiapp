@@ -1,5 +1,28 @@
 FROM ruby:3.2.0
 
+ARG APP_ROOT="/app"
+ARG CHROME_PACKAGES="libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2"
+ARG CHROME_WEBDRIVER_PACKAGES="libnss3-dev"
+
+RUN apt update -qq \
+    && apt install -y ${CHROME_PACKAGES} \
+    && apt install -y ${CHROME_WEBDRIVER_PACKAGES}
+
+RUN CHROME_VERSION=`curl -sS https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE` \
+    && curl -sS -o /tmp/chrome-linux64.zip https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chrome-linux64.zip \
+    && unzip -d /tmp /tmp/chrome-linux64.zip \
+    && mkdir -p /usr/local/lib/chrome \
+    && mv /tmp/chrome-linux64/* /usr/local/lib/chrome \
+    && ln -s /usr/local/lib/chrome/chrome /usr/local/bin/chrome \
+    && curl -sS -o /tmp/chromedriver-linux64.zip https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip \
+    && unzip -d /tmp /tmp/chromedriver-linux64.zip \
+    && mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin
+
+
+WORKDIR $APP_ROOT
+COPY . ${APP_ROOT}/
+
+RUN mkdir /myapp2
 WORKDIR /myapp2
 
 COPY Gemfile Gemfile.lock ./
@@ -7,3 +30,5 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . .
+
+ENTRYPOINT ["rails", "server", "-b", "0.0.0.0"]
