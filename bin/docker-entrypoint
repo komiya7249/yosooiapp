@@ -1,4 +1,10 @@
 #!/bin/bash -e
+set -e
+
+until mysql -hmysql -uroot -ppassword -e "SHOW DATABASES;" > /dev/null 2>&1; do
+  echo "Waiting for MySQL..."
+  sleep 1
+done
 
 # If running the rails server then create or migrate existing database
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then

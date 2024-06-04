@@ -1,0 +1,23 @@
+<div class="weekly_box">
+  <h2>週間天気予報</h2>
+  <table class="weekly_table">
+    <tr class="weekly_title">
+      <th>日時</th>
+      <th>天気</th>
+      <th>服装</th>
+      <th>最高気温</th>
+      <th>最低気温</th>
+      <th>降水確率</th>
+    </tr>
+    <% (0..6).each do |i| %>
+      <tr>
+        <td><%= @weekly_days[i] %><%= @week_array[i] %></td>
+        <td><%= image_tag "#{@weekly_weathers[i].weather_code}.png", class:"weekly_main_image"%></td>
+        <td><%= image_tag "#{@weekly_weathers[i].wear_symbol}.png", class:"weekly_main_image"%></td>
+        <td class="high"><%=  @weekly_weathers[i].temperature_max %>℃</td>
+        <td class="row"><%=  @weekly_weathers[i].temperature_min %>℃</td>
+        <td><%=  @weekly_weathers[i].precipitation_probability %>%</td>               
+      </tr>
+    <%end%>
+  </table>
+</div>
