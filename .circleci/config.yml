@@ -5,28 +5,19 @@ orbs:
 
 jobs:
   rspec:
-    working_directory: ~/myapp2  
     docker:
       - image: cimg/ruby:3.2.0
-    resource_class: small
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.14
       - run:
-          name: Setup environment variable
-          command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+          name: Install dependencies
+          command: bundle install
       - run:
-          name: Start containers and verify it is working
-          command: |
-            set -x
-            sudo docker-compose up -d
-            docker exec web curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+          name: Start Rails server for testing
+          command: bundle exec rails server -p $PORT -e test &
       - run:
-          name: Run rspec
-          command: docker-compose exec web rspec
-
+          name: Run RSpec
+          command: bundle exec rspec
 
   rubocop:
     docker:
